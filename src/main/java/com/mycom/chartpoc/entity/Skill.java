@@ -17,7 +17,7 @@ public class Skill implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="SKILL_ID")
-	private String skillId;
+	private int skillId;
 
 	@Column(name="SKILL_NAME")
 	private String skillName;
@@ -29,11 +29,11 @@ public class Skill implements Serializable {
 	public Skill() {
 	}
 
-	public String getSkillId() {
+	public int getSkillId() {
 		return this.skillId;
 	}
 
-	public void setSkillId(String skillId) {
+	public void setSkillId(int skillId) {
 		this.skillId = skillId;
 	}
 

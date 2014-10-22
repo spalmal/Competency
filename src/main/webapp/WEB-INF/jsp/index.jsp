@@ -51,50 +51,23 @@
 	</p>
   <p></p>
 </div>
-<div id="col2">
-  <div class='box'>
-    <div class='boxtop'>
-      <div></div>
-    </div>
-    <div class='boxcontent'>
-      <h3>Articles</h3>
-      <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
-    </div>
-    <div class='boxbottom'>
-      <div></div>
-    </div>
-  </div>
-  <p><a href="#">Read Articles</a></p>
-  <div class='box'>
-    <div class='boxtop'>
-      <div></div>
-    </div>
-    <div class='boxcontent'>
-      <h3>Bar Plot</h3>
-      <p><a href="#"><img src="../images/docs.png" alt="resources" /></a></p>
-    </div>
-    <div class='boxbottom'>
-      <div></div>
-    </div>
-  </div>
-   <form action="/mvcchart/getCharts/barCharts" method="get">
-  <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to bar charts</a></p>
-  </form>
-  </div>
+<!-- Beginning  of Div2 -->
 <div id="col3">
   <div class='box'>
     <div class='boxtop'>
       <div></div>
     </div>
     <div class='boxcontent'>
-      <h3>Photos</h3>
+      <h3>Bar Plots</h3>
       <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
      </div>
     <div class='boxbottom'>
-      <div></div>
-    </div>
+     <div></div>
+   </div>
   </div>
-  <p><a href="#">Photo Gallery</a></p>
+  <form action="/mvcchart/getCharts/barCharts" method="get">
+  <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to bar charts</a></p>
+  </form>
   <div class='box'>
     <div class='boxtop'>
       <div></div>

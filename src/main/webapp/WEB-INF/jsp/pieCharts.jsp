@@ -38,10 +38,10 @@ return url;
  <span> Enter Associate Name : </span><input type="text" id="name"></input>
  <input type="submit" value="Get Pie Charts"></input>
  </form>
-
 <c:if test="${not empty skills}">
- <img alt="Google Pie Chart" src=${chart1} />
-</c:if>
+		 <img alt="Google Pie Chart" src=${chart1} />
+	</c:if>
+
   <div class='box'>
     <div class='boxtop'>
       <div></div>

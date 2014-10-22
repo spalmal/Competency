@@ -10,54 +10,78 @@ import java.util.List;
  * 
  */
 @Entity
-//@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
+@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="EMPLOYEE_ID")
-	private String employeeId;
+	private int employeeId;
 
-	@Column(name="EMPLOYEE_CODE")
-	private String employeeCode;
+	@Column(name="EMPLOYEE_FIRST_NAME")
+	private String employeeFirstName;
 
-	@Column(name="EmployeeName")
-	private String employeeName;
-	
+	@Column(name="EMPLOYEE_LAST_NAME")
+	private String employeeLastName;
 
-	@Column(name="EmployeeType")
+	@Column(name="EMPLOYEE_TYPE")
 	private String employeeType;
 
 	//bi-directional many-to-one association to EmployeeSkill
 	@OneToMany(mappedBy="employee")
 	private List<EmployeeSkill> employeeSkills;
 
+	//bi-directional many-to-many association to Employee
+	@ManyToMany
+	@JoinTable(
+		name="mentor_mentee"
+		, joinColumns={
+			@JoinColumn(name="MENTEE_ID")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="MENTOR_ID")
+			}
+		)
+	private List<Employee> employees1;
+
+	//bi-directional many-to-many association to Employee
+	@ManyToMany(mappedBy="employees1")
+	private List<Employee> employees2;
+
 	public Employee() {
 	}
 
-	public String getEmployeeId() {
+	public int getEmployeeId() {
 		return this.employeeId;
 	}
 
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
 
-	public String getEmployeeCode() {
-		return this.employeeCode;
+	public String getEmployeeFirstName() {
+		return this.employeeFirstName;
 	}
 
-	public void setEmployeeCode(String employeeCode) {
-		this.employeeCode = employeeCode;
+	public void setEmployeeFirstName(String employeeFirstName) {
+		this.employeeFirstName = employeeFirstName;
 	}
 
-	public String getEmployeeName() {
-		return this.employeeName;
+	public String getEmployeeLastName() {
+		return this.employeeLastName;
 	}
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setEmployeeLastName(String employeeLastName) {
+		this.employeeLastName = employeeLastName;
+	}
+
+	public String getEmployeeType() {
+		return this.employeeType;
+	}
+
+	public void setEmployeeType(String employeeType) {
+		this.employeeType = employeeType;
 	}
 
 	public List<EmployeeSkill> getEmployeeSkills() {
@@ -82,20 +106,20 @@ public class Employee implements Serializable {
 		return employeeSkill;
 	}
 
-	public String getEmployeeType() {
-		return employeeType;
+	public List<Employee> getEmployees1() {
+		return this.employees1;
 	}
 
-	public void setEmployeeType(String employeeType) {
-		this.employeeType = employeeType;
+	public void setEmployees1(List<Employee> employees1) {
+		this.employees1 = employees1;
 	}
 
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Employee> getEmployees2() {
+		return this.employees2;
 	}
 
-	
+	public void setEmployees2(List<Employee> employees2) {
+		this.employees2 = employees2;
+	}
+
 }

@@ -58,16 +58,10 @@ public class HomeController {
 	
 	@RequestMapping(value = "/search/{param}", method = RequestMethod.GET)
 	public String getAssociateDetails(Locale locale, Model model,@PathVariable String param) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-				DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("skills", employeeservice.getEmployeSkils());
+		logger.info("Querying for associate details, {}" , param);
+		model.addAttribute("skills", employeeservice.getEmployeSkills(param));
 		PieCharts demo = new PieCharts();	
-		model.addAttribute("chart1", demo.getChart(employeeservice.getEmployeSkils(),param).toURLString());
+		model.addAttribute("chart1", demo.getChart(employeeservice.getEmployeSkills(param),param).toURLString());
 
 		return "pieCharts";
 	}
@@ -82,9 +76,9 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("skills", employeeservice.getEmployeSkils());
+		model.addAttribute("skills", employeeservice.getEmployeSkills());
 		PieCharts demo = new PieCharts();	
-		model.addAttribute("skillChart", demo.getSkillCharts(employeeservice.getEmployeSkils(),param).toURLString());
+		model.addAttribute("skillChart", demo.getSkillCharts(employeeservice.getEmployeSkills(),param).toURLString());
 		
 		return "pieCharts";
 	}

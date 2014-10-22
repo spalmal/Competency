@@ -1,64 +1,76 @@
 package com.mycom.chartpoc.entity;
-
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import com.googlecode.charts4j.Color;
-import com.googlecode.charts4j.Slice;
+import java.util.Date;
+
 
 /**
  * The persistent class for the employee_skill database table.
  * 
  */
 @Entity
-@Table(name = "employee_skill")
-@NamedQuery(name = "EmployeeSkill.findAll", query = "SELECT e FROM EmployeeSkill e")
+@Table(name="employee_skill")
 public class EmployeeSkill implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "EMPLOYEE_SKILL_ID")
-	private String employeeSkillId;
+	@EmbeddedId
+	private EmployeeSkillPK id;
 
-	@Column(name = "EMPLOYEE_SKILL_RATING")
-	private int employeeSkillRating;
+	@Temporal(TemporalType.DATE)
+	@Column(name="END_DURATION")
+	private Date endDuration;
 
-	// bi-directional many-to-one association to Employee
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "EMPLOYEE_ID")
+	@Temporal(TemporalType.DATE)
+	@Column(name="START_DURATION")
+	private Date startDuration;
+
+	//bi-directional many-to-one association to Employee
+	@ManyToOne
+	@JoinColumn(name="EMPLOYEE_ID" , insertable=false, updatable=false)
 	private Employee employee;
 
-	// bi-directional many-to-one association to Skill
+	//bi-directional many-to-one association to Skill
 	@ManyToOne
-	@JoinColumn(name = "SKILL_ID")
+	@JoinColumn(name="SKILL_ID" , insertable=false, updatable=false)
 	private Skill skill;
+	
+	@Column(name="EMPLOYEE_SKILL_RATING" , insertable=false, updatable=false)
+	private int employeeSkillRating;
+	
+	@Column(name="EMPLOYEE_ID", insertable=false, updatable=false)
+	private int employeeId;
+	
+	@Column(name="SKILL_ID", insertable=false, updatable=false)
+	private int skillId;
 
-	public String getEmployeeSkillId() {
-		return this.employeeSkillId;
+
+	public EmployeeSkill() {
 	}
 
-	public void setEmployeeSkillId(String employeeSkillId) {
-		this.employeeSkillId = employeeSkillId;
+	public EmployeeSkillPK getId() {
+		return this.id;
 	}
 
-	public int getEmployeeSkillRating() {
-		return this.employeeSkillRating;
+	public void setId(EmployeeSkillPK id) {
+		this.id = id;
 	}
 
-	public void setEmployeeSkillRating(int employeeSkillRating) {
-		this.employeeSkillRating = employeeSkillRating;
+	public Date getEndDuration() {
+		return this.endDuration;
+	}
+
+	public void setEndDuration(Date endDuration) {
+		this.endDuration = endDuration;
+	}
+
+	public Date getStartDuration() {
+		return this.startDuration;
+	}
+
+	public void setStartDuration(Date startDuration) {
+		this.startDuration = startDuration;
 	}
 
 	public Employee getEmployee() {
@@ -77,4 +89,25 @@ public class EmployeeSkill implements Serializable {
 		this.skill = skill;
 	}
 
+	public int getEmployeeSkillRating() {
+		return employeeSkillRating;
+	}
+
+	public void setEmployeeSkillRating(int employeeSkillRating) {
+		this.employeeSkillRating = employeeSkillRating;
+	}
+	
+	public int getEmployeeId() {
+		return this.employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public int getSkillId() {
+		return this.skillId;
+	}
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+	
 }

@@ -1,7 +1,6 @@
 package com.mycom.chartpoc.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,43 +10,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.mycom.chartpoc.HomeController;
 import com.mycom.chartpoc.entity.EmployeeSkill;
 import com.mycom.chartpoc.repository.jpa.springdatajpa.EmployeeDataRepository;
+import com.mycom.chartpoc.repository.jpa.springdatajpa.EmployeeSkillDataRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(EmployeeServiceImpl.class);
 
+	private EmployeeSkillDataRepository employeeSkillDataRepository;
+	
 	private EmployeeDataRepository employeeDataRepository;
 
 	@Autowired
-	public EmployeeServiceImpl(EmployeeDataRepository datarepository) {
-		this.employeeDataRepository = datarepository;
+	public EmployeeServiceImpl(EmployeeSkillDataRepository datarepository,EmployeeDataRepository empDataRepo) {
+		this.employeeSkillDataRepository = datarepository;
+		this.employeeDataRepository = empDataRepo;
 	}
 
 	@Override
-	public List<EmployeeSkill> getEmployeSkils() throws DataAccessException {
+	public List<EmployeeSkill> getEmployeSkills(String name)
+			throws DataAccessException {
 		@SuppressWarnings("unchecked")
-		ArrayList<EmployeeSkill> skills = (ArrayList<EmployeeSkill>) employeeDataRepository
-				.findAll();
+		int id = employeeDataRepository.getEmployeeIdFromName(name);
+		ArrayList<EmployeeSkill> skills = (ArrayList<EmployeeSkill>) employeeSkillDataRepository
+				.findAll(id);
 
 		return skills;
 	}
 
 	@Override
 	public List<String> getMentorNames() throws DataAccessException {
-	List<String> mentors = (ArrayList<String>) employeeDataRepository.getMentors();
-	return mentors;
+		List<String> mentors = (ArrayList<String>) employeeSkillDataRepository
+				.getMentors();
+		return mentors;
 	}
-	
+
 	@Override
-	public 	Map<String,String> getSkillSet() throws DataAccessException {
+	public Map<String, String> getSkillSet() throws DataAccessException {
 		logger.info("in skillset");
-	//Map<String,String> skillSet = (HashMap<String,String>) employeeDataRepository.getSkillSets();
-	//System.out.println(skillSet);
-	return null;
+		// Map<String,String> skillSet = (HashMap<String,String>)
+		// employeeDataRepository.getSkillSets();
+		// System.out.println(skillSet);
+		return null;
 	}
+
+	@Override
+	public List<EmployeeSkill> getEmployeSkills() throws DataAccessException {
+		ArrayList<EmployeeSkill> skills = (ArrayList<EmployeeSkill>) employeeSkillDataRepository
+				.findAll();
+		return skills;
+	}
+
 }

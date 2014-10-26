@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.mycom.chartpoc.entity.Employee;
 import com.mycom.chartpoc.entity.EmployeeSkill;
 import com.mycom.chartpoc.repository.jpa.springdatajpa.EmployeeDataRepository;
 import com.mycom.chartpoc.repository.jpa.springdatajpa.EmployeeSkillDataRepository;
@@ -42,8 +43,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<String> getMentorNames() throws DataAccessException {
-		List<String> mentors = (ArrayList<String>) employeeSkillDataRepository
+	public List<Employee> getMentorNames() throws DataAccessException {
+		List<Employee> mentors = (ArrayList<Employee>) employeeDataRepository
 				.getMentors();
 		return mentors;
 	}
@@ -62,6 +63,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ArrayList<EmployeeSkill> skills = (ArrayList<EmployeeSkill>) employeeSkillDataRepository
 				.findAll();
 		return skills;
+	}
+
+	@Override
+	public List<String> getMenteeName(int employeeId) {
+		List<String> mentees = (List<String>) employeeDataRepository.getMentees(employeeId);
+		System.out.println("Inside EmployeeServiceImpl "+mentees.size());
+		return mentees  ;
 	}
 
 }

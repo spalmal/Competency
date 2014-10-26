@@ -67,64 +67,40 @@ return url;
 </c:if>
  </p>
 </div>
-<div id="col2">
-  <div class='box'>
-    <div class='boxtop'>
-      <div></div>
-    </div>
-    <div class='boxcontent'>
-      <h3>Articles</h3>
-      <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
-    </div>
-    <div class='boxbottom'>
-      <div></div>
-    </div>
-  </div>
-  <p><a href="#">Read Articles</a></p>
-  <div class='box'>
-    <div class='boxtop'>
-      <div></div>
-    </div>
-    <div class='boxcontent'>
-      <h3>Resources</h3>
-      <p><a href="#"><img src="../images/docs.png" alt="resources" /></a></p>
-    </div>
-    <div class='boxbottom'>
-      <div></div>
-    </div>
-  </div>
-  <p><a href="#">Link to Resources</a></p>
-</div>
 <div id="col3">
   <div class='box'>
     <div class='boxtop'>
       <div></div>
     </div>
     <div class='boxcontent'>
-      <h3>Photos</h3>
-      <p><a href="pieCharts.jsp"><img src=".../images/photos.png" alt="photos" title="PIE CHARTS" /></a></p>
-    </div>
+      <h3>Bar Plots</h3>
+      <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
+     </div>
     <div class='boxbottom'>
-      <div></div>
-    </div>
+     <div></div>
+   </div>
   </div>
-  <p><a href="barCharts.jsp">Photo Gallery</a></p>
+  <form action="/mvcchart/getCharts/barCharts" method="get">
+  <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to bar charts</a></p>
+  </form>
   <div class='box'>
     <div class='boxtop'>
       <div></div>
     </div>
     <div class='boxcontent'>
-      <h3>Contact</h3>
-      <p><a href="#"><img src="../images/mail.png" alt="contact" title="BAR CHARTS"/></a></p>
-    </div>
+      <h3>PIE CHARTS</h3>
+      <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
+     </div>
     <div class='boxbottom'>
       <div></div>
     </div>
-  </div>
-  <p><a href="#">Contact us</a></p>
+     </div>
+   <form action="/mvcchart/getCharts/pieCharts" method="get">
+  <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to pie charts</a></p>
+  </form>
+  
   <p>&nbsp;</p>
-  <p>The above images are my attempt at creating web icons.</p>
-</div>
+  </div>
 <div id="footer"> <a href="#">homepage</a> | <a href="#">contact</a> | <a href="http://validator.w3.org/check?uri=referer">html</a> | <a href="http://jigsaw.w3.org/css-validator">css</a> | &copy; 2007 Anyone | Design by <a href="http://www.mitchinson.net"> www.mitchinson.net</a> | This work is licensed under a <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.mycom.chartpoc;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycom.chartpoc.service.EmployeeService;
 import com.mycom.chartpoc.util.PieCharts;
@@ -39,14 +41,19 @@ public class HomeController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
 				DateFormat.LONG, locale);
-
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("mentors", employeeservice.getMentorNames());
-		//PieCharts demo = new PieCharts();	
-		//model.addAttribute("chart", demo.getChart(employeeservice.getEmployeSkils(),"vishwas").toURLString());
-//		employeeservice.getSkillSet();
 		return "index";
+	}
+	
+	@RequestMapping(value = "/getMentee/{employeeId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> getMentee(Model model,@PathVariable int employeeId) {
+		logger.info("Serach for mentees under mentor id ,{}",employeeId);
+		model.addAttribute("mentees", employeeservice.getMenteeName(employeeId));
+		System.out.println("employeeId "+employeeId);
+		return employeeservice.getMenteeName(employeeId);
 	}
 	
 	 @RequestMapping("/getCharts/{param}")

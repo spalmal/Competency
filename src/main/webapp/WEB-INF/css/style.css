@@ -60,7 +60,7 @@ height : 1px;
 
 #col1 {
 float : left;
-width : 61%;
+width : 74%;
 margin-bottom : 1em;
 border-right : 1px solid #ccc;
 padding-right : 3%;
@@ -75,8 +75,8 @@ padding-right : 3%;
 }
 #col3 {
 float : left;
-width : 19%;
-margin-left : 3%;
+width : 10%;
+margin-left : 2%;
 margin-bottom : 1em;
 }
 		/*FOOTER */
@@ -88,6 +88,12 @@ padding : 0.5em;
 text-align : left;
 }
 
+/* Fonts */
+.mentee {
+	color : #777750;
+	margin-left : 3%;
+	font-size : 75%;
+}
 		/*ROUNDED CORNERS */
 .box {
 background : #cccc9a;
@@ -128,6 +134,14 @@ font-size : 175%;
 text-transform : uppercase;
 letter-spacing : 3px;
 color : #666;
+background : inherit;
+}
+h4 {
+margin-top : 0;
+font-size : 140%;
+text-transform : uppercase;
+letter-spacing : 3px;
+color : #677;
 background : inherit;
 }
 blockquote {

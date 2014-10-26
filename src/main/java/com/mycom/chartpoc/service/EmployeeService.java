@@ -5,12 +5,17 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.mycom.chartpoc.entity.Employee;
 import com.mycom.chartpoc.entity.EmployeeSkill;
 
 public interface EmployeeService {
+	
+	
 	List<EmployeeSkill> getEmployeSkills() throws DataAccessException;
 	
-	List<String> getMentorNames() throws DataAccessException;
+	List<String> getMenteeName(int employeeId) throws DataAccessException;
+	
+	List<Employee> getMentorNames() throws DataAccessException;
 
 	Map<String, String> getSkillSet() throws DataAccessException;
 

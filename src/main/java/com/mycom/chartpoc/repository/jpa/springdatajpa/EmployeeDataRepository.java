@@ -22,5 +22,7 @@ public interface EmployeeDataRepository extends CrudRepository<Employee, Integer
 	
 	@Query("SELECT e.employeeId FROM Employee e WHERE e.employeeFirstName = ?1")
 	public int getEmployeeIdFromName(String name);
-
+	
+	//public List<Employee> findByNameContainingIgnoreCaseName(String name);
+	
 }

@@ -12,6 +12,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name="employee_skill")
+@SqlResultSetMappings( {
+
+@SqlResultSetMapping(name = "SkillRating", columns = { @ColumnResult(name = "AVG"),
+    @ColumnResult(name = "Skill_Name") })
+
+})
 public class EmployeeSkill implements Serializable {
 	private static final long serialVersionUID = 1L;
 

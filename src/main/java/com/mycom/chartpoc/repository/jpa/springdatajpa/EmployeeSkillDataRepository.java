@@ -1,12 +1,12 @@
 package com.mycom.chartpoc.repository.jpa.springdatajpa;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mycom.chartpoc.entity.Employee;
 import com.mycom.chartpoc.entity.EmployeeSkill;
 
 @Repository
@@ -17,7 +17,6 @@ public interface EmployeeSkillDataRepository extends
 	public List<EmployeeSkill> findAll(int employeeId);
 	
 	/*@Query("SELECT AVG(employeeSkillRating),s.skillName FROM EmployeeSkill es,Skill s WHERE es.skillId=s.skillId GROUP BY s.skillId")
-	public Map<Integer,String> getSkillSets();*/
-	
-	
+	public List<Object> getSkillSets();*/
+		
 }

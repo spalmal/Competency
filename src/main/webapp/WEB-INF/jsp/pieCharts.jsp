@@ -64,6 +64,7 @@ return url;
  <p>
 <c:if test="${not empty skills}">
  <img alt="Google Pie Chart" src=${skillChart} />
+ <img alt="Google Pie Chart" src=${barGraph} />
 </c:if>
  </p>
 </div>

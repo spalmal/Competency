@@ -50,10 +50,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Map<String, String> getSkillSet() throws DataAccessException {
+	public Map<Integer, String> getSkillSet() throws DataAccessException {
 		logger.info("in skillset");
-		// Map<String,String> skillSet = (HashMap<String,String>)
-		// employeeDataRepository.getSkillSets();
+		// List<Object> skillSet = employeeSkillDataRepository.getSkillSets();
 		// System.out.println(skillSet);
 		return null;
 	}

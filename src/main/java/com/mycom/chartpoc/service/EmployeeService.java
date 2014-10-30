@@ -17,9 +17,8 @@ public interface EmployeeService {
 	
 	List<Employee> getMentorNames() throws DataAccessException;
 
-	Map<String, String> getSkillSet() throws DataAccessException;
+	Map<Integer, String> getSkillSet() throws DataAccessException;
 
 	List<EmployeeSkill> getEmployeSkills(String name) throws DataAccessException;
 	
-	
-}
+	}

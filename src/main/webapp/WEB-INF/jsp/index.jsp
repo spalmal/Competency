@@ -12,23 +12,51 @@
      <%@ include file="../css/style.css"%>  
 </style>  
 <script>
+ 
+ 	// get list of mentees from mentor id
 	function call(id) {
-		   $("#"+id).remove();
-		var elements = $();
+		$("#"+id).slideToggle("slow");
+		 if (!$("#"+id).length){
+			var elements = $();
 		   $("."+id).append('<div id="'+id+'">');
 		var urls ="/mvcchart/getMentee/"+id;
 		 $.ajax({
 			 url:urls,
 			 success:function(data){
 				 for (var i in data) {
-					 $("#id").append(data[i]);
-					 elements = elements.add('<li class="mentee">'+data[i]+'</li>');
+					// $("#id").append(data[i]);
+					 elements = elements.add('<li class="mentee"> <a href="#" onclick="getMenteeSkills('+"'"+data[i]+"'"+')">'+data[i]+'</a></li>');
 					}
 				 elements = elements.add('</div>');
 				   $("#"+id).append(elements);
 	
 			  }});
+		 }
 	}
+	
+ 	//get skill details 
+ 	function getMenteeSkills(name) {
+		 if ($("#employeeDetails").length){
+		 	$("#details").remove();
+		 }
+ 		var $div = $('<div id="details"/>');
+ 		var $table = $('<table id="'+name+'"><th colspan="2">Skill Details for '+name+'</th>');
+ 		
+ 		$("#employeeDetails").append($div);	
+ 		$("#details").append($table);
+ 			 $.ajax({
+			 url:"/mvcchart/getMenteeSkillSets/"+name,
+			 success:function(data){
+				 for (var i in data.forms) {
+					$('#'+name).append('<tr><td>'+data.forms[i].skill+'</td><td>'+data.forms[i].skillRating+'</td></tr>');
+					
+					 }
+				 alert(elements);
+		
+			  }});
+ 			  
+		 }
+	
 </script>
 </head>
 <body>
@@ -59,8 +87,9 @@
       <div></div>
     </div>
   </div>
-  <p>Corner images from <a href="http://wigflip.com/cornershop/">Cornershop</a></p>
+<p></p>
   <h2>MENTORS</h2>
+  <div id="col2">
   <p><c:if test="${not empty mentors}">
 		<ul>
 			<c:forEach var="listValue" items="${mentors}">
@@ -71,16 +100,24 @@
 	</c:if>
 	</p>
   <p></p>
+
+
 </div>
-<div id="riya"> <p><c:if test="${not empty mentees}">
+<div id="col3">
+ <c:if test="${not empty skillDetails}">
 		<ul>
-			<c:forEach var="listValue" items="${mentees}">
-			<li>${listValue}</li> 
+			<c:forEach var="listValue" items="${skillDetails}">
+				<li>${listValue.employeeId}</li>			
 			</c:forEach>
+			
 		</ul>
 	</c:if>
-	</p>
 </div>
+<div id="employeeDetails"></div>
+
+
+</div>
+<!-- End of column1 -->
 <!-- Beginning  of Div3 -->
 <div id="col3">
   <div class='box'>

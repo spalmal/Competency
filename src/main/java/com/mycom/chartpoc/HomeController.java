@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.mycom.chartpoc.entity.EmployeeSkill;
 import com.mycom.chartpoc.service.EmployeeService;
+import com.mycom.chartpoc.util.BarGraph;
 import com.mycom.chartpoc.util.PieCharts;
 
 /**
@@ -53,7 +58,36 @@ public class HomeController {
 		logger.info("Serach for mentees under mentor id ,{}",employeeId);
 		model.addAttribute("mentees", employeeservice.getMenteeName(employeeId));
 		System.out.println("employeeId "+employeeId);
+		model.addAttribute("skillSet", employeeservice.getSkillSet());
 		return employeeservice.getMenteeName(employeeId);
+	}
+	
+	@RequestMapping(value ="/getMenteeSkillSets/{employeeName}", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONObject getMenteeSkills(Model model,@PathVariable String employeeName) {
+		logger.info("Serach for mentees skill for  ,{}",employeeName);
+	//	model.addAttribute("skillDetails", employeeservice.getEmployeSkills(employeeName));
+		System.out.println(employeeservice.getEmployeSkills(employeeName));
+		Gson gson = new Gson();
+		 
+		// convert java object to JSON format,
+		// and returned as JSON formatted string
+		
+		JSONObject responseDetailsJson = new JSONObject();
+	    JSONArray jsonArray = new JSONArray();
+	    List<EmployeeSkill> employeeSkill = employeeservice.getEmployeSkills(employeeName);
+	    for(EmployeeSkill e : employeeSkill) {
+	        JSONObject formDetailsJson = new JSONObject();
+	        formDetailsJson.put("name", e.getEmployee().getEmployeeFirstName());
+	        formDetailsJson.put("skill", e.getSkill().getSkillName());
+	        formDetailsJson.put("skillRating", e.getEmployeeSkillRating());
+	        jsonArray.add(formDetailsJson);
+	    }
+		//String json = gson.toJson(employeeservice.getEmployeSkills(employeeName));
+	    responseDetailsJson.put("forms", jsonArray);//Here you can see the data in json format
+
+		return responseDetailsJson;
+	
 	}
 	
 	 @RequestMapping("/getCharts/{param}")
@@ -86,6 +120,8 @@ public class HomeController {
 		model.addAttribute("skills", employeeservice.getEmployeSkills());
 		PieCharts demo = new PieCharts();	
 		model.addAttribute("skillChart", demo.getSkillCharts(employeeservice.getEmployeSkills(),param).toURLString());
+		BarGraph bar = new BarGraph();
+		model.addAttribute("barGraph", bar.getChart(employeeservice.getEmployeSkills()).toURLString());
 		
 		return "pieCharts";
 	}

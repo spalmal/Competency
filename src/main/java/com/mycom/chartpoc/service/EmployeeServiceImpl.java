@@ -43,6 +43,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	public List<EmployeeSkill> getEmployeSkills(int id)
+			throws DataAccessException {
+		@SuppressWarnings("unchecked")
+		ArrayList<EmployeeSkill> skills = (ArrayList<EmployeeSkill>) employeeSkillDataRepository
+				.	getSkillForMentees(id);
+
+		return skills;
+	}
+	@Override
 	public List<Employee> getMentorNames() throws DataAccessException {
 		List<Employee> mentors = (ArrayList<Employee>) employeeDataRepository
 				.getMentors();

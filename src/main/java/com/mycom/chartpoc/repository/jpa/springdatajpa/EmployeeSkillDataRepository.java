@@ -18,5 +18,8 @@ public interface EmployeeSkillDataRepository extends
 	
 	/*@Query("SELECT AVG(employeeSkillRating),s.skillName FROM EmployeeSkill es,Skill s WHERE es.skillId=s.skillId GROUP BY s.skillId")
 	public List<Object> getSkillSets();*/
+	
+	@Query("SELECT e FROM EmployeeSkill e WHERE e.employeeId IN(SELECT m.menteeId FROM MentorMentee m WHERE m.mentorId=?1)")
+	public List<EmployeeSkill> getSkillForMentees(int id);
 		
 }

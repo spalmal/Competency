@@ -27,6 +27,7 @@
 					// $("#id").append(data[i]);
 					 elements = elements.add('<li class="mentee"> <a href="#" onclick="getMenteeSkills('+"'"+data[i]+"'"+')">'+data[i]+'</a></li>');
 					}
+				 elements = elements.add('<p></p><ul><h5><a href="#" onclick="getAllMenteeSkills('+"'"+id+"','"+data[i]+"'"+')">get all mentees</a></h5><ul>');
 				 elements = elements.add('</div>');
 				   $("#"+id).append(elements);
 	
@@ -51,11 +52,50 @@
 					$('#'+name).append('<tr><td>'+data.forms[i].skill+'</td><td>'+data.forms[i].skillRating+'</td></tr>');
 					
 					 }
-				 alert(elements);
-		
 			  }});
  			  
 		 }
+ 	//get skill detaiuls for all employees under a mentor
+ 	function getAllMenteeSkills(name,nameID) {
+	 if ($("#employeeDetails").length){
+		 	$("#details").remove();
+		 }
+		var $div = $('<div id="details"/>');
+		//var $table = $('<table id="'+nameID+'"><th colspan="2">Associate  Details for Mentor'+nameID+'</th>');
+		var $table = $('<table id="'+nameID+'">');
+		$("#employeeDetails").append($div);	
+		$("#details").append($table);
+		 $('#'+nameID).append("<td><tr>apple</tr></td>");
+			 $.ajax({
+			 url:"/mvcchart/getAllMenteeSkillSets/"+name,
+			 success:function(data){
+				 var obj = data.employeeSkill;
+				
+				 var obj2 = data.skillName;
+				 $('#'+nameID).append('<th><td>'+"Skill Names"+'</td>');
+				 for(var key in obj) {
+					 $('#'+nameID).append("<td>"+key+"</td>");
+					 
+				 }
+				 $('#'+nameID).append("</th>");
+				 for (var key in obj2) {				
+					 		$('#'+nameID).append('<tr><td>'+(parseInt(key) + parseInt(1))+'</td><td>'+obj2[key]+'</td></tr>');
+				 }
+					 	
+				 for(var key in obj) {
+				   	var a = obj[key];
+					 $('#'+nameID).find('tr').each(function(j){
+						var i = $("tr", $("td:first")).length;
+					
+				        $(this).find('td').eq(1).after('<td>'+a[j]+'</td>');
+			 		 });
+				   
+				  }
+				 
+			
+				
+				   }});
+			 }
 	
 </script>
 </head>

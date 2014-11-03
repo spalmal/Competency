@@ -1,9 +1,14 @@
 package com.mycom.chartpoc;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -86,6 +91,42 @@ public class HomeController {
 		//String json = gson.toJson(employeeservice.getEmployeSkills(employeeName));
 	    responseDetailsJson.put("forms", jsonArray);//Here you can see the data in json format
 
+		return responseDetailsJson;
+	
+	}
+	
+	@RequestMapping(value ="/getAllMenteeSkillSets/{mentorId}", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONObject getAllMenteeSkills(Model model,@PathVariable int mentorId) {
+		logger.info("Serach for mentees skill for  ,{}",mentorId);
+	//	model.addAttribute("skillDetails", employeeservice.getEmployeSkills(employeeName));
+			 
+		// convert java object to JSON format,
+		// and returned< as JSON formatted string
+		Map<String,List<Integer>> map = new HashMap<>();
+		Map<String,String> mentees = new HashMap<>();		
+		JSONObject responseDetailsJson = new JSONObject();
+	    JSONArray jsonArray = new JSONArray();
+	    List<EmployeeSkill> employeeSkill = employeeservice.getEmployeSkills(mentorId);
+		List<Integer> skills  = new ArrayList<>();
+		Set<String> skillName  = new LinkedHashSet();
+	    for(EmployeeSkill e : employeeSkill) {
+	    	//mentees.put(e.getEmployee().getEmployeeFirstName(),)
+	   // 	map.put( e.getEmployee().getEmployeeFirstName(), null);
+	    	if(!map.containsKey(e.getEmployee().getEmployeeFirstName())) {
+	    		map.put( e.getEmployee().getEmployeeFirstName(), null);
+	    		skills = new ArrayList<Integer>();
+	       	}
+	    	if(map.containsKey(e.getEmployee().getEmployeeFirstName())) {
+	       		skills.add(e.getEmployeeSkillRating());
+	       		skillName.add(e.getSkill().getSkillName());
+	    		map.put( e.getEmployee().getEmployeeFirstName(), skills);
+	    	}
+	    	
+	 	    }
+		
+	    responseDetailsJson.put("employeeSkill", map);//Here you can see the data in json format
+	    responseDetailsJson.put("skillName", skillName);
 		return responseDetailsJson;
 	
 	}

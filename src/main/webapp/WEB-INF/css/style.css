@@ -163,6 +163,14 @@ letter-spacing : 3px;
 color : #677;
 background : inherit;
 }
+h5 {
+margin-top : 0;
+font-size : 80%;
+text-transform : lowercase;
+letter-spacing : 3px;
+color : #690;
+background : inherit;
+}
 blockquote {
 font-weight : bold;
 font-style : italic;

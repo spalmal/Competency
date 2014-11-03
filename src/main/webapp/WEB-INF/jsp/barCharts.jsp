@@ -27,6 +27,14 @@
   <h2>Welcome to <span style="font-weight:bold; color:#333;">Competency Tracker</span></h2>
   <p>The compency tracker is an idea innovation to manage the skills and their progress of each associate within the CAP Team. This tracker will help to keep the progress measures of an idvidual.</p>
   <p>This is a Spring-Mvc application as a test demo to achieve our competency tracker</p>
+  <form  onsubmit="this.action = '/mvcchart/search/' + this.name.value"   method="get">
+ <span> Enter Associate Name : </span><input type="text" id="name"></input>
+ <input type="submit" value="Get Pie Charts"></input>
+ </form>
+<c:if test="${not empty skills}">
+		 <img alt="Google Pie Chart" src=${chart1} />
+	</c:if>
+  
   <div class='box'>
     <div class='boxtop'>
       <div></div>

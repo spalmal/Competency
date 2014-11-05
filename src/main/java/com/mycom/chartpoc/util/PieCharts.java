@@ -5,9 +5,11 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.jfree.chart.LegendItem;
 
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.GCharts;
+import com.googlecode.charts4j.LegendPosition;
 import com.googlecode.charts4j.PieChart;
 import com.googlecode.charts4j.Slice;
 import com.mycom.chartpoc.entity.EmployeeSkill;
@@ -31,20 +33,25 @@ public class PieCharts {
 
 		PieChart pChart = GCharts.newPieChart(slice);
 		pChart.setTitle(name + " Skill Details ", Color.BLACK, 15);
-		pChart.setSize(720, 360);
+		pChart.setSize(830, 360);
 		pChart.setThreeD(true);
 		return pChart;
 	}
 
+	/**
+	 * @param skills
+	 * @param skillName
+	 * @return
+	 */
 	public PieChart getSkillCharts(Collection<EmployeeSkill> skills,
 			String skillName) {
 		slice = new ArrayList<Slice>();
-		StringBuilder sb0 = new StringBuilder("Nill :");
-		StringBuilder sb1 = new StringBuilder("Poor :");
-		StringBuilder sb2 = new StringBuilder("Average :");
-		StringBuilder sb3 = new StringBuilder("Good :");
-		StringBuilder sb4 = new StringBuilder("Experienced :");
-		StringBuilder sb5 = new StringBuilder("Expert :");
+		StringBuilder sb0 = new StringBuilder();
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		StringBuilder sb3 = new StringBuilder();
+		StringBuilder sb4 = new StringBuilder();
+		StringBuilder sb5 = new StringBuilder();
 		int [] counter = {0,0,0,0,0,0};
 		for (EmployeeSkill skill : skills) {
 
@@ -54,51 +61,59 @@ public class PieCharts {
 				case 1:
 					sb1.append(skill.getEmployee().getEmployeeFirstName());
 					counter[1]++;
-					sb1.append(" \n");
+					sb1.append(", ");
 					break;
 				case 2:
 					sb2.append(skill.getEmployee().getEmployeeFirstName());
-					sb2.append(" ");
+					sb2.append(", ");
 					counter[2]++;
 					break;
 				case 3:
 					sb3.append(skill.getEmployee().getEmployeeFirstName());
-					sb3.append(" ");
+					sb3.append(", ");
 					counter[3]++;
 					break;
 				case 4:
 					sb4.append(skill.getEmployee().getEmployeeFirstName());
-					sb4.append(" ");
+					sb4.append(", ");
 					counter[4]++;
 					break;
 				case 5:
 					sb5.append(skill.getEmployee().getEmployeeFirstName());
-					sb5.append(" ");
+					sb5.append(", ");
 					counter[5]++;
 					break;
 				default:
 					sb0.append(skill.getEmployee().getEmployeeFirstName());
-					sb0.append(" ");
+					sb0.append(", ");
 					counter[0]++;
 					break;
 
 				}
 			}
 		}
-		slice.add(Slice.newSlice(counter[0], sb0.toString()));
-		slice.add(Slice.newSlice(counter[1], sb1.toString()));
-		slice.add(Slice.newSlice(counter[2], sb2.toString()));
-		slice.add(Slice.newSlice(counter[3], sb3.toString()));
-		slice.add(Slice.newSlice(counter[4], sb4.toString()));
-		slice.add(Slice.newSlice(counter[5], sb5.toString()));
+		slice.add(Slice.newSlice(counter[0],Color.BISQUE, sb0.toString(),"No Experience"));
+		slice.add(Slice.newSlice(counter[1],Color.CADETBLUE, sb1.toString(),"Poor"));
+		slice.add(Slice.newSlice(counter[2],Color.BURLYWOOD, sb2.toString(),"Average"));
+		slice.add(Slice.newSlice(counter[3],Color.BLUEVIOLET, sb3.toString(),"Good"));
+		slice.add(Slice.newSlice(counter[4],Color.WHEAT, sb4.toString(),"Experienced"));
+		slice.add(Slice.newSlice(counter[5],Color.CHOCOLATE, sb5.toString(),"Expert"));
 
 		PieChart pChart = GCharts.newPieChart(slice);
 		pChart.setTitle(skillName + " Associate Details ", Color.BLACK, 15);
-		pChart.setSize(720, 360);
+	
+		pChart.setSize(850, 350);
 		pChart.setThreeD(true);
 		return pChart;
 	}
 
+	/**
+	 * 
+	 * Skill details for an associate
+	 * @param skills
+	 * @param skillName
+	 * @return
+	 */
 	public PieChart getAllSkillDetails(Collection<EmployeeSkill> skills,
 			String skillName) {
 		slice = new ArrayList<Slice>();
@@ -112,8 +127,10 @@ public class PieCharts {
 
 		PieChart pChart = GCharts.newPieChart(slice);
 		pChart.setTitle(skillName + " Associate Details ", Color.BLACK, 15);
-		pChart.setSize(720, 360);
+		pChart.setSize(850, 350);
 		pChart.setThreeD(true);
+		
+		pChart.setLegendPosition(LegendPosition.TOP_VERTICAL);
 		return pChart;
 	}
 

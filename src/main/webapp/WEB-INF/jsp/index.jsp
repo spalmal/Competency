@@ -190,6 +190,21 @@
    <form action="/mvcchart/getCharts/pieCharts" method="get">
   <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to pie charts</a></p>
   </form>
+  <div class='box'>
+    <div class='boxtop'>
+      <div></div>
+    </div>
+    <div class='boxcontent'>
+      <h3>Line CHARTS</h3>
+      <p><a href="#"><img src="../images/articles.png" alt="articles" title="articles" /></a></p>
+     </div>
+    <div class='boxbottom'>
+      <div></div>
+    </div>
+     </div>
+   <form action="/mvcchart/getCharts/lineCharts" method="get">
+  <p><a href="#" onclick="$(this).closest('form').submit()">Click to redirect to pie charts</a></p>
+  </form>
   
   <p>&nbsp;</p>
  </div>
